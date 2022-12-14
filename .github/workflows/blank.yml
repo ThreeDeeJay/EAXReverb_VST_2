@@ -10,6 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: '[8.0)'
+
+      - uses: edgarrc/action-7z@v1
+        with:
+          args: 7z a -t7z -mx=9 build.7z ./build/
+    
       - name: Run a multi-line script
         run: |
           ${{github.workspace}}/build.bat
